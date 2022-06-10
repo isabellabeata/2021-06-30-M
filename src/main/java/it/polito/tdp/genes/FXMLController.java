@@ -38,11 +38,40 @@ public class FXMLController {
 
     @FXML
     void doContaArchi(ActionEvent event) {
+    	
+    	this.txtResult.clear();
+    	this.model.creaGrafo();
+    	
+    	this.txtResult.appendText(this.model.nVertici());
+    	this.txtResult.appendText(this.model.nArchi());
+    	
+    	this.txtResult.appendText(this.model.sPesoMin()+"\n");
+    	this.txtResult.appendText(this.model.sPesoMax()+"\n");
+    	
+    	Double soglia=Double.parseDouble(this.txtSoglia.getText());
+    	
+    	if(soglia> this.model.pesoMax() || soglia<this.model.pesoMin()) {
+    		this.txtResult.setText("inserire un valore fra peso minimo e peso massimo!" );
+    	}
 
+    		this.txtResult.appendText(this.model.nArchiMinS(soglia)+"\n");
+    		this.txtResult.appendText(this.model.nArchiMaggS(soglia));
+    	
     }
 
     @FXML
     void doRicerca(ActionEvent event) {
+    	this.txtResult.clear();
+    	
+    	Double soglia=Double.parseDouble(this.txtSoglia.getText());
+    	
+    	if(soglia> this.model.pesoMax() || soglia<this.model.pesoMin()) {
+    		this.txtResult.setText("inserire un valore fra peso minimo e peso massimo!" );
+    	}
+    	
+    	
+    	this.txtResult.appendText(this.model.getCammino(soglia));
+    	
 
     }
 
